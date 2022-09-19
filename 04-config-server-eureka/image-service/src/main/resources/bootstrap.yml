@@ -1,0 +1,36 @@
+spring:
+  application:
+    # name of the service
+    name: image-service
+  cloud:
+  # habilitamos el discovery y le damos el nombre del application main que seteamos y esta levantado en eureka
+  config:
+      discovery:
+        enabled: true
+        service-id: config-service
+  # definimos el profile activo, podemos cambiarlo a "dev" por ejemplo
+  profiles:
+    active: prod
+
+# definimos la url de eureka para que se registre
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+#properties de spring actuator
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+#informacion de la app
+info:
+  app:
+    name: image-service
+    description: Image Service created for Class 6
+    version: 1.0.0

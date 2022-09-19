@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: CountFilter
+      routes:
+        - id: userRoute
+          uri: http://localhost:8082
+          predicates:
+            - Path=/users/**
+          filters:
+            - AddRequestHeader=user-request-header, testing-header
+            - AddResponseHeader=user-response-header, testing-header
+        - id: productRoute
+          uri: http://localhost:8081
+          predicates:
+            - Path=/products/**
+          #filters:
+           # - AddRequestHeader=product-request-header, testing-header
+            #- AddResponseHeader=product-response-header, testing-header
+
+
+
+
